@@ -1,7 +1,7 @@
-module ieee802-dot1dc-ats-if {
+module ieee802-dot1dc-ats-if-v2 {
   yang-version "1.1";
-  namespace urn:ieee:std:802.1Q:yang:ieee802-dot1dc-ats-if;
-  prefix ats-if;
+  namespace urn:ieee:std:802.1Q:yang:ieee802-dot1dc-ats-if-v2;
+  prefix ats-if-v2;
   import ietf-system {
     prefix sys;
   }
@@ -39,6 +39,11 @@ module ieee802-dot1dc-ats-if {
 
     This version of this YANG module is part of IEEE Std 802.1DC;
     see the standard itself for full legal notices.";
+
+  revision 2026-05-11 {
+    description
+      "Maintenance 0392";
+  }
 
   revision 2024-09-26 {
     description
