@@ -60,12 +60,13 @@ module ieee802-dot1q-ats-bridge-v2 {
   augment "/dot1q:bridges/dot1q:bridge/dot1q:component" {
     description
       "Augments the Bridge component with ATS parameters.";
+    uses ats:ats-parameters;
     uses sfsg:sfsg-parameters {
       augment "stream-filters/stream-filter-instance-table" {
         description
           "Augments the Bridge component stream filter for ATS
           schedulers.";
-        uses ats:ats-parameters;
+
         container scheduler {
           description
             "This container encapsulates ATS scheduler nodes.";
@@ -73,6 +74,8 @@ module ieee802-dot1q-ats-bridge-v2 {
             type leafref {
               path
                 '..'+
+                '/..'+
+                '/..'+
                 '/..'+
                 '/schedulers'+
                 '/scheduler-instance-table'+
