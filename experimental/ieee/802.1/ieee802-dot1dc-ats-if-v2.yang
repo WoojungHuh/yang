@@ -43,6 +43,11 @@ module ieee802-dot1dc-ats-if-v2 {
   revision 2026-05-11 {
     description
       "Maintenance 0392";
+
+    reference
+      "IEEE Std 802.1DC:
+      IEEE Std 802.1DC-2024 Quality of Service Provision by
+      Network Systems.";
   }
 
   revision 2024-09-26 {

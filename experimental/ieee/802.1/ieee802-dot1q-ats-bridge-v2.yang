@@ -40,8 +40,11 @@ module ieee802-dot1q-ats-bridge-v2 {
   revision 2026-05-11 {
     description
       "Maintenance 0392";
+    reference
+      "IEEE Std 802.1Qcz-2023, Bridges and Bridged Networks - Congestion
+      Isolation.";
   }
-  
+
   revision 2023-07-03 {
     description
       "Published as part of IEEE Std 802.1Qcz-2023.";
