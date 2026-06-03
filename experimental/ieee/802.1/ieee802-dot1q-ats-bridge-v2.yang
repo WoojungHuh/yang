@@ -11,8 +11,8 @@ module ieee802-dot1q-ats-bridge-v2 {
   import ieee802-dot1q-ats {
     prefix ats;
   }
-  import ieee802-dot1q-stream-filters-gates {
-    prefix sfsg;
+  import ieee802-dot1q-stream-filters-gates-bridge {
+    prefix sfsg-bridge;
   }
   organization
     "IEEE 802.1 Working Group";
@@ -37,6 +37,13 @@ module ieee802-dot1q-ats-bridge-v2 {
     This version of this YANG module is part of IEEE Std 802.1Q; see the
     standard itself for full legal notices.";
 
+  revision 2026-06-01 {
+    description
+      "Maintenance 0393";
+    reference
+      "IEEE Std 802.1Qcz-2023, Bridges and Bridged Networks - Congestion
+      Isolation.";
+  }
   revision 2026-05-11 {
     description
       "Maintenance 0392";
@@ -61,40 +68,39 @@ module ieee802-dot1q-ats-bridge-v2 {
     description
       "Augments the Bridge component with ATS parameters.";
     uses ats:ats-parameters;
-    uses sfsg:sfsg-parameters {
-      augment "stream-filters/stream-filter-instance-table" {
-        description
-          "Augments the Bridge component stream filter for ATS
-          schedulers.";
+  }
+  augment "/dot1q:bridges/dot1q:bridge/dot1q:component"
+        + "/sfsg-bridge:stream-filters"
+        + "/sfsg-bridge:stream-filter-instance-table" {
+    description
+      "Augments the Bridge component stream filter for ATS schedulers.";
 
-        container scheduler {
-          description
-            "This container encapsulates ATS scheduler nodes.";
-          leaf scheduler-ref {
-            type leafref {
-              path
-                '..'+
-                '/..'+
-                '/..'+
-                '/..'+
-                '/schedulers'+
-                '/scheduler-instance-table'+
-                '/scheduler-instance-id';
-            }
-            description
-              "A reference to the ATS scheduler associated with this
-              stream filter.";
-          }
-          leaf scheduler-enable {
-            type boolean;
-            default "false";
-            description
-              "If TRUE, this stream filter has an associated ATS
-              scheduler referenced by scheduler-ref. If FALSE, no ATS
-              scheduler is associated with this stream filter
-              (scheduler-ref is ignored).";
-          }
+    container scheduler {
+      description
+        "This container encapsulates ATS scheduler nodes.";
+      leaf scheduler-ref {
+        type leafref {
+          path
+            '..'+
+            '/..'+
+            '/..'+
+            '/..'+
+            '/schedulers'+
+            '/scheduler-instance-table'+
+            '/scheduler-instance-id';
         }
+        description
+          "A reference to the ATS scheduler associated with this
+          stream filter.";
+      }
+      leaf scheduler-enable {
+        type boolean;
+        default "false";
+        description
+          "If TRUE, this stream filter has an associated ATS
+          scheduler referenced by scheduler-ref. If FALSE, no ATS
+          scheduler is associated with this stream filter
+          (scheduler-ref is ignored).";
       }
     }
   }
