@@ -12,8 +12,8 @@ module ieee802-dot1q-congestion-isolation-bridge-v2 {
   import ieee802-dot1q-congestion-isolation {
     prefix ci;
   }
-  import ieee802-dot1q-stream-filters-gates {
-    prefix sfsg;
+  import ieee802-dot1q-stream-filters-gates-bridge {
+    prefix sfsg-bridge;
   }
   organization
     "IEEE 802.1 Working Group";
@@ -60,25 +60,27 @@ module ieee802-dot1q-congestion-isolation-bridge-v2 {
       "Augments the Bridge component with stream filters and stream
       gates.";
     uses ci:cip-parameters;
-    uses sfsg:sfsg-parameters {
-      augment
-        "stream-filters/stream-filter-instance-table/stream-handle-spec" {
-        if-feature "congestion-isolation-bridge";
+  }
+
+  augment "/dot1q:bridges/dot1q:bridge/dot1q:component"
+        + "/sfsg-bridge:stream-filters"
+        + "/sfsg-bridge:stream-filter-instance-table"
+        + "/sfsg-bridge:stream-handle-spec" {
+    if-feature "congestion-isolation-bridge";
+    description
+      "Dot1q Congestion Isolation";
+    case null-handle {
+      description
+        "Congestion isolation specific stream_handle specifications.";
+      leaf null-handle {
+        type empty;
         description
-          "Dot1q Congestion Isolation";
-        case null-handle {
-          description
-            "Congestion isolation specific stream_handle specifications.";
-          leaf null-handle {
-            type empty;
-            description
-              "The stream_handle specification represents the value when
-              no stream_handle is provided.";
-          }
-        }
+          "The stream_handle specification represents the value when
+          no stream_handle is provided.";
       }
     }
   }
+
   augment "/if:interfaces/if:interface/dot1q:bridge-port" {
     if-feature "congestion-isolation-bridge";
     description
