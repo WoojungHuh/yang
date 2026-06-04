@@ -11,8 +11,8 @@ module ieee802-dot1dc-ats-if-v2 {
   import ieee802-dot1q-ats {
     prefix ats;
   }
-  import ieee802-dot1q-stream-filters-gates {
-    prefix sfsg;
+  import ieee802-dot1q-stream-filters-gates-sys {
+    prefix sfsg-sys;
   }
 
   organization
@@ -72,39 +72,39 @@ module ieee802-dot1dc-ats-if-v2 {
     description
       "Augments the system with ATS parameters.";
     uses ats:ats-parameters;
-    uses sfsg:sfsg-parameters {
-      augment "stream-filters/stream-filter-instance-table" {
-        description
-          "Augments the system stream filter for ATS
-          schedulers.";
-        container scheduler {
-          description
-            "This container encapsulates ATS scheduler nodes.";
-          leaf scheduler-ref {
-            type leafref {
-              path
-                '..'+
-                '/..'+
-                '/..'+
-                '/..'+
-                '/schedulers'+
-                '/scheduler-instance-table'+
-                '/scheduler-instance-id';
-            }
-            description
-              "A reference to the ATS scheduler associated with this
-              stream filter.";
-          }
-          leaf scheduler-enable {
-            type boolean;
-            default "false";
-            description
-              "If TRUE, this stream filter has an associated ATS
-              scheduler referenced by scheduler-ref. If FALSE, no ATS
-              scheduler is associated with this stream filter
-              (scheduler-ref is ignored).";
-          }
+  }
+
+  augment "/sys:system"
+        + "/sfsg-sys:stream-filters"
+        + "/sfsg-sys:stream-filter-instance-table" {
+    description
+      "Augments the system stream filter for ATS schedulers.";
+    container scheduler {
+      description
+        "This container encapsulates ATS scheduler nodes.";
+      leaf scheduler-ref {
+        type leafref {
+          path
+            '..'+
+            '/..'+
+            '/..'+
+            '/..'+
+            '/schedulers'+
+            '/scheduler-instance-table'+
+            '/scheduler-instance-id';
         }
+        description
+          "A reference to the ATS scheduler associated with this
+          stream filter.";
+      }
+      leaf scheduler-enable {
+        type boolean;
+        default "false";
+        description
+          "If TRUE, this stream filter has an associated ATS
+          scheduler referenced by scheduler-ref. If FALSE, no ATS
+          scheduler is associated with this stream filter
+          (scheduler-ref is ignored).";
       }
     }
   }
