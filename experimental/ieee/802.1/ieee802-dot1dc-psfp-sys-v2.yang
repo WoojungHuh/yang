@@ -1,7 +1,7 @@
-module ieee802-dot1dc-psfp-sys {
+module ieee802-dot1dc-psfp-sys-v2 {
   yang-version "1.1";
-  namespace urn:ieee:std:802.1Q:yang:ieee802-dot1dc-psfp-sys;
-  prefix psfp-sys;
+  namespace urn:ieee:std:802.1Q:yang:ieee802-dot1dc-psfp-sys-v2;
+  prefix psfp-sys-v2;
   
   import ietf-system {
     prefix sys;
@@ -35,6 +35,15 @@ module ieee802-dot1dc-psfp-sys {
     This version of this YANG module is part of IEEE Std 802.1DC;
     see the standard itself for full legal notices.";
 
+  revision 2026-06-04 {
+    description
+      "Maintenance #0393";
+
+    reference
+      "IEEE Std 802.1DC:
+      IEEE Std 802.1DC-2024 Quality of Service Provision by
+      Network Systems.";
+  }
   revision 2024-09-26 {
     description
       "Published as part of IEEE Std 802.1DC-2024.
