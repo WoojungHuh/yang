@@ -15,7 +15,7 @@ module ieee802-dot1dc-psfp-sys-v2 {
   import ieee802-dot1q-stream-filters-gates {
     prefix sfsg;
   }
-  import ieee802-dot1q-stream-filters-gates-sys {
+  import ieee802-dot1dc-stream-filters-gates-sys {
     prefix sfsg-sys;
   }
   import ietf-system {

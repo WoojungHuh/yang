@@ -11,7 +11,7 @@ module ieee802-dot1dc-ats-if-v2 {
   import ieee802-dot1q-ats {
     prefix ats;
   }
-  import ieee802-dot1q-stream-filters-gates-sys {
+  import ieee802-dot1dc-stream-filters-gates-sys {
     prefix sfsg-sys;
   }
 
