@@ -1,7 +1,7 @@
-module ieee802-dot1q-stream-filters-gates-sys {
+module ieee802-dot1dc-stream-filters-gates-sys {
   yang-version "1.1";
   namespace
-    urn:ieee:std:802.1Q:yang:ieee802-dot1q-stream-filters-gates-sys;
+    urn:ieee:std:802.1Q:yang:ieee802-dot1dc-stream-filters-gates-sys;
   prefix sfsg-sys;
   import ietf-system {
     prefix sys;
@@ -30,7 +30,7 @@ module ieee802-dot1q-stream-filters-gates-sys {
     
     This version of this YANG module is part of IEEE Std 802.1DC; see the
     standard itself for full legal notices.";
-  revision 2026-06-03 {
+  revision 2026-06-05 {
     description
       "Maintenance #0393.";
     reference
