@@ -1,0 +1,90 @@
+module ieee802-dot1q-congestion-isolation-bridge-v2 {
+  yang-version "1.1";
+  namespace
+    urn:ieee:std:802.1Q:yang:ieee802-dot1q-congestion-isolation-bridge-v2;
+  prefix ci-bridge-v2;
+  import ietf-interfaces {
+    prefix if;
+  }
+  import ieee802-dot1q-bridge {
+    prefix dot1q;
+  }
+  import ieee802-dot1q-congestion-isolation {
+    prefix ci;
+  }
+  import ieee802-dot1q-stream-filters-gates-bridge {
+    prefix sfsg-bridge;
+  }
+  organization
+    "IEEE 802.1 Working Group";
+  contact
+    "WG-URL: https://1.ieee802.org/
+    WG-EMail: stds-802-1@ieee.org
+    Contact: IEEE 802.1 Working Group Chair
+    Postal: C/O IEEE 802.1 Working Group
+           IEEE Standards Association
+           445 Hoes Lane
+           Piscataway, NJ 08855
+           USA
+    
+    E-mail: stds-802-1-chairs@listserv.ieee.org";
+  description
+    "This module provides management of IEEE 802.1Q Bridge components
+    that support Congestion Isolation.
+    
+    Copyright (C) IEEE (2023).
+    
+    This version of this YANG module is part of IEEE Std 802.1Q; see the
+    standard itself for full legal notices.";
+
+  revision 2026-11-25 {
+    description
+      "Experimental version fixing creating own
+      stream-filter-instance-table, stream-gate-instance-table, 
+      and, flow-meter-instance-table than one per Bridge component
+      per 802.1Q. (maintenance item 0393).";
+
+    reference
+      "IEEE Std 802.1Q-202X, Bridges and Bridged Networks.:
+      IEEE 802.1 Maintenance Item 0393.";
+  }
+
+  feature congestion-isolation-bridge {
+    description
+      "Feature Congestion Isolation in Bridges";
+  }
+  augment "/dot1q:bridges/dot1q:bridge/dot1q:component" {
+    if-feature "congestion-isolation-bridge";
+    description
+      "Augments the Bridge component with stream filters and stream
+      gates.";
+    uses ci:cip-parameters;
+  }
+
+  augment "/dot1q:bridges/dot1q:bridge/dot1q:component"
+        + "/sfsg-bridge:stream-filters"
+        + "/sfsg-bridge:stream-filter-instance-table"
+        + "/sfsg-bridge:stream-handle-spec" {
+    if-feature "congestion-isolation-bridge";
+    description
+      "Dot1q Congestion Isolation";
+    case null-handle {
+      description
+        "Congestion isolation specific stream_handle specifications.";
+      leaf null-handle {
+        type empty;
+        description
+          "The stream_handle specification represents the value when
+          no stream_handle is provided.";
+      }
+    }
+  }
+
+  augment "/if:interfaces/if:interface/dot1q:bridge-port" {
+    if-feature "congestion-isolation-bridge";
+    description
+      "Augment a bridge port with Congestion Isolation specific
+      configuration.";
+    uses ci:cip-port-parameters;
+  }
+}
