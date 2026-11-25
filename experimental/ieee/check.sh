@@ -7,7 +7,7 @@ cwd=$(pwd)
 ietf_dir="standard/ietf"
 ieee_dir="standard/ieee"
 ieee_experimental_dir="experimental/ieee"
-to_check="802 802.1 802.1/maint-370-383 802.3 1906.1"
+to_check="802 802.1 802.1/maint-370-383 802.1/maint-392-393 802.3 1906.1"
 
 # relax constraint for now
 # add --ietf if you want to do strict IETF checking
